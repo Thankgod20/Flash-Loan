@@ -165,7 +165,9 @@ contract FlashloadTest is IUniswapV2Callee {
         WETH = WETH_;
         UNISWAP_FACTORY = UNISWAP_FACTORY_;
     }
-
+    function getTokenPair(address _tokenBorrow) external view returns(address) {
+        return IUniswapV2Factory(UNISWAP_FACTORY).getPair(_tokenBorrow,WETH);
+    }
     function initFlashloan(address _tokenBorrow,address to, uint amount) external{
         address pair = IUniswapV2Factory(UNISWAP_FACTORY).getPair(_tokenBorrow,WETH);
         require(pair!= address(0),'Pair donot exist');
